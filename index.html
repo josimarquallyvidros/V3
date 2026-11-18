@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OrçaProQually v8.1 · Móveis Planejados</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="theme-color" content="#0a2a5e">
+<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("orcaTema")||"light")}catch(e){document.documentElement.setAttribute("data-theme","light")}</script>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><path d="M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01M16 14v4"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+  <symbol id="i-gem" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></symbol>
+  <symbol id="i-redo" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+</defs></svg>
+<header class="top no-print">
+  <div class="brand">
+    <img src="favicon.png" alt="OrçaProQually" onerror="this.style.display='none'">
+    <div class="brand-t"><b>OrçaProQually</b><span>Móveis Planejados <span class="ver">v8.1</span></span></div>
+  </div>
+
+  <!-- MENU FIXO: as 4 telas principais -->
+  <nav class="tabs main-nav" id="mainNav">
+    <div class="tab on" data-tab="orc"><svg class="ic"><use href="#i-calc"/></svg><span>Orçamento</span></div>
+    <div class="tab" data-tab="view"><svg class="ic"><use href="#i-cube"/></svg><span>Visualização 3D</span></div>
+    <div class="tab" data-tab="res"><svg class="ic"><use href="#i-chart"/></svg><span>Resultado</span></div>
+    <div class="tab" data-tab="proposta"><svg class="ic"><use href="#i-doc"/></svg><span>Proposta</span></div>
+  </nav>
+
+  <div class="top-right">
+    <span id="nuvemStatus" class="pill">☁️ Offline</span>
+    <span id="templateStatus" class="pill">⚙️ —</span>
+    <div class="save-chip"><svg class="ic"><use href="#i-check"/></svg><div><b>Salvo</b><small id="saveStamp">—</small></div></div>
+    <button class="ibtn" onclick="undo()" title="Desfazer (Ctrl+Z)"><svg class="ic"><use href="#i-undo"/></svg></button>
+    <button class="ibtn" onclick="redo()" title="Refazer (Ctrl+Y)"><svg class="ic"><use href="#i-redo"/></svg></button>
+    <button class="ibtn salvar" onclick="salvarTudo()" title="Salvar (Ctrl+S)"><svg class="ic"><use href="#i-save"/></svg></button>
+    <button class="theme-toggle" id="themeToggle" onclick="alternarTema()" aria-label="Alternar tema claro/escuro" title="Alternar tema">
+      <svg class="ic i-sun"><use href="#i-sun"/></svg><svg class="ic i-moon"><use href="#i-moon"/></svg><span class="knob"></span>
+    </button>
+  </div>
+</header>
+
+<!-- BARRA SECUNDÁRIA: atalhos + menu Configurações -->
+<div class="subbar no-print">
+  <nav class="tabs sub-nav">
+    <div class="tab" data-tab="lista"><svg class="ic"><use href="#i-folder"/></svg><span>Meus Orçamentos</span></div>
+    <div class="tab" data-tab="compra"><svg class="ic"><use href="#i-cart"/></svg><span>Lista de Compra</span></div>
+    <div class="tab" data-tab="hist"><svg class="ic"><use href="#i-clock"/></svg><span>Histórico</span></div>
+  </nav>
+  <div class="menu" id="menuCfg">
+    <button class="menu-btn" id="btnCfg" aria-haspopup="true"><svg class="ic"><use href="#i-gear"/></svg><span>Configurações</span><svg class="ic chev"><use href="#i-chev"/></svg></button>
+    <div class="menu-pop">
+      <div class="mgrp">Cadastros e padrões</div>
+      <div class="tabs">
+        <div class="tab" data-tab="comp"><svg class="ic"><use href="#i-layers"/></svg><span class="mt"><b>Composições</b><small>Tipos de vãos e estruturas</small></span></div>
+        <div class="tab" data-tab="mat"><svg class="ic"><use href="#i-gem"/></svg><span class="mt"><b>Materiais</b><small>Perfis, vidros, ACM e acessórios</small></span></div>
+        <div class="tab" data-tab="mat" data-scroll="#paramsCard"><svg class="ic"><use href="#i-sliders"/></svg><span class="mt"><b>Parâmetros</b><small>Margem, impostos, CNC e empresa</small></span></div>
+        <div class="tab" data-tab="comp" data-scroll="#modelosCard"><svg class="ic"><use href="#i-grid"/></svg><span class="mt"><b>Modelos e Padrões</b><small>Salvar e carregar modelos</small></span></div>
+      </div>
+      <hr>
+      <div class="mgrp">Arquivo</div>
+      <button class="mi" onclick="abrirListaNuvem()"><svg class="ic"><use href="#i-cloud"/></svg><span class="mt"><b>Backup na nuvem</b><small>Abrir orçamentos salvos</small></span></button>
+      <button class="mi" onclick="exportJSON()"><svg class="ic"><use href="#i-down"/></svg><span class="mt"><b>Exportar</b><small>Baixar arquivo .json</small></span></button>
+      <button class="mi" onclick="document.getElementById('impFile').click()"><svg class="ic"><use href="#i-up"/></svg><span class="mt"><b>Importar</b><small>Carregar arquivo .json</small></span></button>
+      <button class="mi" onclick="imprimirAuto()"><svg class="ic"><use href="#i-print"/></svg><span class="mt"><b>Imprimir</b><small>Imprime a tela atual</small></span></button>
+      <button class="mi perigo" onclick="resetAll()"><svg class="ic"><use href="#i-trash"/></svg><span class="mt"><b>Zerar tudo</b><small>Apaga o orçamento atual</small></span></button>
+    </div>
+  </div>
+  <input id="impFile" type="file" accept=".json" class="hidden" onchange="importJSON(event)">
+</div>
+
+<main>
+  <div class="print-header">
+    <img src="logo.png" alt="" onerror="this.style.display='none'">
+    <div class="ph-txt">
+      <h1>OrçaProQually · Móveis Planejados</h1>
+      <div class="ph-sub">Vidro · Alumínio · ACM — Projeto sob medida</div>
+    </div>
+    <div class="ph-info">
+      <div><b>Orçamento:</b> <span id="phNumero">—</span></div>
+      <div><b>Data:</b> <span id="phData">—</span></div>
+      <div><b>Cliente:</b> <span id="phCliente">—</span></div>
+    </div>
+  </div>
+
+  <!-- ABA ORÇAMENTO -->
+  <section id="tab-orc">
+    <div class="card no-print">
+      <h2>Dados do Orçamento</h2>
+      <div class="grid g4">
+        <div><label>Nº Orçamento</label><input id="orcNum" onchange="setOrc('numero',this.value)"></div>
+        <div><label>Cliente</label><input id="orcCli" onchange="setOrc('cliente',this.value)"></div>
+        <div><label>Telefone</label><input id="orcTel" onchange="setOrc('telefone',this.value)"></div>
+        <div><label>Data</label><input type="date" id="orcData" onchange="setOrc('data',this.value)"></div>
+      </div>
+      <div class="grid g3" style="margin-top:8px">
+        <div><label>Endereço</label><input id="orcEnd" onchange="setOrc('endereco',this.value)"></div>
+        <div><label>Vendedor</label><input id="orcVend" onchange="setOrc('vendedor',this.value)"></div>
+        <div><label>Validade (dias)</label><input type="number" id="orcVal" value="15" onchange="setOrc('validade',+this.value)"></div>
+        <div><label>Observações</label><input id="orcObs" onchange="setOrc('obs',this.value)"></div>
+      </div>
+    </div>
+    <div class="card no-print">
+      <h2>Novo Ambiente</h2>
+      <div class="row">
+        <input id="nomeAmb" placeholder="Ex: Cozinha, Quarto..." style="flex:1;min-width:220px">
+        <input type="number" id="ambL" placeholder="Largura (mm)" style="width:130px">
+        <input type="number" id="ambA" placeholder="Altura (mm)" style="width:130px">
+        <input type="number" id="ambP" placeholder="Prof. (mm)" style="width:130px">
+        <button onclick="addAmbiente()">+ Ambiente</button>
+      </div>
+    </div>
+    <div id="listaAmb"></div>
+  </section>
+
+  <section id="tab-lista" class="hidden">
+    <div class="card">
+      <div class="flex-between">
+        <h2 style="margin:0">📁 Meus Orçamentos</h2>
+        <div class="row no-print">
+          <button class="btn ok" onclick="novoOrcamento()">➕ Novo</button>
+          <button class="btn sec" onclick="atualizarListaOrcamentos()">🔄 Atualizar</button>
+        </div>
+      </div>
+      <div id="listaOrcamentos" style="margin-top:10px"></div>
+    </div>
+    <div class="card"><h2>Orçamento Atual</h2><div id="infoOrcamentoAtual"></div></div>
+  </section>
+
+  <section id="tab-comp" class="hidden">
+    <div class="card">
+      <h2>Composição</h2>
+      <div class="row no-print" id="modelosCard" style="margin-bottom:10px">
+        <button class="btn ok sm" onclick="salvarComoTemplate()">💾 Salvar padrão</button>
+        <button class="btn sec sm" onclick="carregarTemplateDaNuvem()">☁️ Baixar padrão</button>
+        <button class="btn warn sm" onclick="restaurarFabrica()">↩️ Restaurar</button>
+      </div>
+      <div class="tabs-inner" id="tabsTipoVao"></div>
+      <div id="editorTipoVao"></div>
+    </div>
+  </section>
+
+  <section id="tab-mat" class="hidden">
+    <div class="card">
+      <h2>Biblioteca de Materiais</h2>
+      <div class="tabs-inner" id="tabsCatMat">
+        <div class="tab on" data-cat="perfis">🔩 Perfis</div>
+        <div class="tab" data-cat="vidros">🪟 Vidros</div>
+        <div class="tab" data-cat="acm">🧱 ACM</div>
+        <div class="tab" data-cat="acess">🔧 Acessórios</div>
+      </div>
+      <div id="editorMat"></div>
+    </div>
+    <div class="card" id="paramsCard">
+      <h2>Parâmetros Globais</h2>
+      <div class="params-sub">Chapas e corte</div>
+      <div class="grid g4">
+        <div><label>Chapa Vidro L (mm)</label><input type="number" id="cv_w" value="1600"></div>
+        <div><label>Chapa Vidro A (mm)</label><input type="number" id="cv_h" value="2200"></div>
+        <div><label>Chapa ACM L (mm)</label><input type="number" id="ca_w" value="1200"></div>
+        <div><label>Chapa ACM A (mm)</label><input type="number" id="ca_h" value="5000"></div>
+        <div><label>Barra Perfil (mm)</label><input type="number" id="bp_l" value="6000"></div>
+        <div><label>Kerf (mm)</label><input type="number" id="kerf" value="3"></div>
+      </div>
+      <div class="params-sub">Financeiro</div>
+      <div class="grid g4">
+        <div><label>Margem líquida desejada (%)</label><input type="number" id="p_margem" step="0.5" value="25"></div>
+        <div><label>Impostos (% da venda)</label><input type="number" id="imp" step="0.5" value="0"></div>
+        <div><label>Comissão (% da venda)</label><input type="number" id="p_comissao" step="0.5" value="0"></div>
+        <div><label>Mão de obra (R$ por m² de frente)</label><input type="number" id="p_mo" step="1" value="0"></div>
+        <div><label>Frete (R$)</label><input type="number" id="frete" value="0"></div>
+        <div><label>Instalação (R$)</label><input type="number" id="instal" value="0"></div>
+        <div><label>Preço mínimo: materiais + (%)</label><input type="number" id="p_piso" step="1" value="10"></div>
+      </div>
+      <div class="params-sub">CNC — ACM (G-code)</div>
+      <div class="grid g4">
+        <div><label>Diâmetro da fresa (mm)</label><input type="number" id="p_cnc_fresa" step="0.5" value="6"></div>
+        <div><label>Profundidade total (mm)</label><input type="number" id="p_cnc_prof" step="0.1" value="4.5"></div>
+        <div><label>Profundidade por passe (mm)</label><input type="number" id="p_cnc_passe" step="0.1" value="2"></div>
+        <div><label>Avanço de corte (mm/min)</label><input type="number" id="p_cnc_avanco" step="100" value="3000"></div>
+        <div><label>Avanço de mergulho (mm/min)</label><input type="number" id="p_cnc_mergulho" step="100" value="1000"></div>
+        <div><label>Rotação (rpm)</label><input type="number" id="p_cnc_rpm" step="500" value="18000"></div>
+        <div><label>Altura de segurança Z (mm)</label><input type="number" id="p_cnc_zseg" step="1" value="5"></div>
+      </div>
+      <div class="params-sub">Dados da empresa (aparecem na proposta)</div>
+      <div class="grid g3">
+        <div><label>Nome da empresa</label><input id="p_emp_nome"></div>
+        <div><label>CNPJ</label><input id="p_emp_cnpj"></div>
+        <div><label>Telefone</label><input id="p_emp_tel"></div>
+        <div><label>E-mail</label><input id="p_emp_email"></div>
+        <div style="grid-column:span 2"><label>Endereço</label><input id="p_emp_end"></div>
+      </div>
+      <div style="margin-top:8px"><label>Condições de pagamento</label><textarea id="p_emp_cond" rows="3" style="width:100%" placeholder="Ex.: 50% de entrada e 50% na entrega. Cartão em até 10x."></textarea></div>
+      <button class="btn" style="margin-top:10px" onclick="salvarParams()">Salvar Parâmetros</button>
+    </div>
+  </section>
+
+  <!-- NOVA ABA: VISUALIZAÇÃO 3D -->
+  <section id="tab-view" class="hidden">
+    <div class="card">
+      <div class="flex-between" style="margin-bottom:10px">
+        <h2 style="margin:0">🎨 Visualização do Móvel</h2>
+        <div class="row no-print">
+          <button class="btn sec sm" onclick="viewer3D.snapshot()">📸 PNG</button>
+          <button class="btn warn sm" onclick="imprimirVisualizacao()">🖨️ Imprimir</button>
+        </div>
+      </div>
+      <div class="viewer-controls no-print">
+        <div class="ctrl-group" id="cameraPresets">
+          <button data-cam="frontal" class="on" title="Frente">👁️ Frontal</button>
+          <button data-cam="iso" title="Isométrica">📐 Iso</button>
+          <button data-cam="superior" title="Topo">⬆️ Topo</button>
+          <button data-cam="lateral" title="Lateral">↔️ Lateral</button>
+        </div>
+	    <div class="ctrl-group" id="modeGroup">
+		  <button data-mode="solido" class="on">🧊 Sólido</button>
+		  <button data-mode="wireframe">📐 Wire</button>
+		  <button data-mode="transp">🔮 Transp</button>
+		  <button id="btnOpaco" onclick="viewer3D.toggleOpaco()">💧 Transparente</button>
+		</div>
+        <div class="ctrl-group">
+          <button onclick="viewer3D.reset()">🔄 Reset</button>
+		  <button onclick="viewer3D.zoomBy(1.2)">🔍+</button>
+		  <button onclick="viewer3D.zoomBy(0.8)">🔍-</button>
+          <button id="btnAutoRotate" onclick="viewer3D.toggleAuto()">🌀 Auto</button>
+          <button id="btnCotas" onclick="viewer3D.toggleCotas()">📏 Cotas</button>
+		  <button id="btnFundo" onclick="viewer3D.toggleFundo()">⬜ Fundo</button>
+        </div>
+        <span class="small" style="margin-left:auto">💡 Arraste para girar · Scroll para zoom</span>
+		 <div class="ctrl-group" id="explosaoGroup">
+          <button id="btnExplosao" onclick="viewer3D.toggleExplosao()">💥 Explosão</button>
+          <input type="range" id="explosaoSlider" min="0" max="1" step="0.05" value="0"
+                 disabled
+                 oninput="viewer3D.setExplosao(+this.value)"
+                 style="width:100px;padding:0;background:transparent;border:none">
+        </div>
+      </div>
+      <div id="viewerAmbTabs" class="tabs-inner no-print" style="margin:8px 0"></div>
+      <div class="viewer-wrap">
+        <div class="viewer-main">
+          <div style="position:relative">
+            <canvas id="viewer3D"></canvas>
+            <canvas id="viewerOverlay"></canvas>
+            <div class="viewer-hud" id="viewerHud">—</div>
+            <div id="viewerMsg" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#8aa0bf;text-align:center;font-size:14px;max-width:80%">
+              Adicione ambientes para visualizar.
+            </div>
+          </div>
+          <div class="viewer-legend" id="viewerLegend"></div>
+        </div>
+        <aside class="viewer-panel no-print" id="viewerPanel"></aside>
+      </div>
+      <div id="viewerSnapshot" style="display:none;margin-top:14px"></div>
+    </div>
+    <div class="card"><h2>Detalhes</h2><div id="viewerDetails"></div></div>
+  </section>
+
+  <section id="tab-res" class="hidden">
+    <div class="card no-print" style="background:var(--panel2)">
+      <div class="flex-between">
+        <h2 style="margin:0">📊 Resultado <span class="pill acc" id="cacheInfo" style="font-size:10px">cache: —</span></h2>
+        <div class="row">
+          <button class="btn warn" onclick="imprimirResumoFinanceiro()" title="Imprime os 5 indicadores, o detalhamento e a venda por ambiente">🖨️ Resumo financeiro</button>
+          <button class="btn ok" onclick="imprimirResultado()" title="Imprime o plano de corte completo: perfis, vidros, ACM e acessórios">🖨️ Plano de corte completo</button>
+        </div>
+      </div>
+    </div>
+    <div class="card hide-print"><h2>Resumo</h2><div id="finCards"></div></div>
+    <div class="card hide-print"><h2>Custo por Ambiente</h2><div id="detGerencial"></div><div id="resumoAmb"></div></div>
+    <div class="card print-target" id="card-perfis">
+      <div class="flex-between"><h2>Plano de Corte — Perfis</h2> <div class="row no-print"><button class="btn sec sm" title="Imprimir somente este tipo" onclick="imprimirSecao('card-perfis')">🖨️</button></div></div>
+      <div id="cortePerfis"></div>
+    </div>
+    <div class="card print-target" id="card-vidros">
+      <div class="flex-between"><h2>Plano de Corte — Vidros</h2> <div class="row no-print"><button class="btn sec sm" title="Baixar arquivo DXF dos vidros para a CNC / mesa de corte" onclick="baixarCNC('vidros','dxf')">📐 DXF</button><button class="btn sec sm" title="Imprimir somente este tipo" onclick="imprimirSecao('card-vidros')">🖨️</button></div></div>
+      <div id="corteVidros"></div>
+    </div>
+    <div class="card print-target" id="card-acm">
+      <div class="flex-between"><h2>Plano de Corte — ACM</h2> <div class="row no-print"><button class="btn sec sm" title="Baixar arquivo DXF do ACM" onclick="baixarCNC('acm','dxf')">📐 DXF</button><button class="btn sec sm" title="Baixar G-code do ACM para a router CNC" onclick="baixarCNC('acm','gcode')">⚙️ G-code</button><button class="btn sec sm" title="Imprimir somente este tipo" onclick="imprimirSecao('card-acm')">🖨️</button></div></div>
+      <div id="corteACM"></div>
+    </div>
+    <div class="card print-target" id="card-acess">
+      <div class="flex-between"><h2>Acessórios</h2> <div class="row no-print"><button class="btn sec sm" title="Imprimir somente este tipo" onclick="imprimirSecao('card-acess')">🖨️</button></div></div>
+      <div id="listaAcess"></div>
+    </div>
+	    <div class="card hide-print" id="card-comparacao">
+      <h2>⚖️ Comparativo de Otimização — Guilhotina × MaxRects</h2>
+      <div id="comparacaoAlgoritmos"></div>
+    </div>
+  </section>
+
+  <section id="tab-proposta" class="hidden">
+    <div class="card">
+      <div class="flex-between no-print" style="margin-bottom:16px">
+        <div>
+          <label style="color:var(--warn);font-size:12px;">Desconto (R$)</label>
+          <input type="number" id="desc" value="0" onchange="setDescontoV2(this.value)" style="border-color:var(--warn)">
+          <div class="small" id="descInfo" style="margin-top:4px;max-width:420px"></div>
+        </div>
+        <div class="row">
+          <button class="btn ok" onclick="imprimirPropostaFotos()" title="Proposta com a foto 3D de cada ambiente, valores, total, assinatura e rodapé">🖨️ Proposta com fotos</button>
+          <button class="btn sec" onclick="imprimirPropostaCliente()">🖨️ Cliente (simples)</button>
+          <button class="btn sec" onclick="imprimirPropostaInterna()">🖨️ Interna</button>
+        </div>
+      </div>
+      <div id="propostaV2"></div>
+    </div>
+  </section>
+
+  <section id="tab-compra" class="hidden">
+    <div class="card">
+      <h2>Lista de Compra</h2>
+      <div id="listaCompra"></div>
+      <button class="btn sec no-print" style="margin-top:10px" onclick="exportCSV()">⬇️ CSV</button>
+      <button class="btn warn no-print" style="margin-top:10px;margin-left:8px" onclick="imprimirListaCompra()">🖨️</button>
+    </div>
+  </section>
+
+  <section id="tab-hist" class="hidden">
+    <div class="card">
+      <h2>Histórico</h2>
+      <div class="row no-print" style="margin-bottom:10px">
+        <button class="btn ok" onclick="salvarOrcamento()">💾 Criar snapshot</button>
+      </div>
+      <div id="listaHist"></div>
+    </div>
+  </section>
+</main>
+
+<div class="statusbar no-print">
+  <span id="sbInfo">—</span>
+  <span class="sp"></span>
+  <span id="sbAutosave">autosave: —</span>
+  <span id="sbUndo">undo: 0</span>
+  <span id="sbCache">cache: —</span>
+</div>
+
+<div id="toast" class="toast"></div>
+<div id="modalRoot"></div>
+
+<!-- Biblioteca 3D (colocar estes 3 arquivos na mesma pasta do index.html) -->
+<script src="three.min.js"></script>
+<script src="OrbitControls.js"></script>
+<script src="TransformControls.js"></script>
+
+<script src="maxrects.js"></script>
+
+<!-- Visualizador 3D -->
+<script src="viewer-moveis.js"></script>
+<script src="itens/bancada.js"></script>
+<script src="itens/pia.js"></script>
+<script src="itens/torneira.js"></script>
+<script src="itens/cooktop.js"></script>
+<script src="itens/coifa.js"></script>
+<script src="itens/geladeira.js"></script>
+<script src="itens/forno.js"></script>
+<script src="itens/banqueta.js"></script>
+<script src="itens/rodape.js"></script>
+<script src="itens/piso.js"></script>
+<!-- para criar um item novo: copie itens/_modelo.js e acrescente uma linha aqui -->
+<script src="viewer-ambiente.js"></script>
+<script src="viewer-ui.js"></script>
+<script src="viewer3d.js"></script>
+
+<script src="app.js"></script>
+<script src="financeiro.js"></script>
+<script src="cnc-export.js"></script>
+<script src="ui-tema.js"></script>
+</body>
+</html>

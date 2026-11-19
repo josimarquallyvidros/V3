@@ -57,7 +57,10 @@
       if (typeof ResizeObserver !== "undefined") new ResizeObserver(() => this.resize()).observe(this.canvas);
       window.addEventListener("resize", () => this.resize());
       if (g.V3UI) g.V3UI.init(this);
-      this.resize(); this._buildAmbTabs(); this.render(); this._loop();
+      this.resize(); this._buildAmbTabs(); this.render(); this._syncBotoes(); this._loop();
+      // Re-sincroniza após o carregamento completo para eliminar qualquer
+      // estado inconsistente deixado por bindings duplicados (app.js vs viewer3d.js)
+      setTimeout(() => { try { this._syncBotoes(); } catch (e) {} }, 300);
     },
     _erro: function (m) { if (this.msgEl) { this.msgEl.textContent = m; this.msgEl.style.display = "block"; } console.error("[viewer3D] " + m); },
 
@@ -130,6 +133,21 @@
         };
       });
       const bc = $("btnCotas"); if (bc) bc.classList.toggle("on", this.cotas);
+    },
+    /* Garante que SOMENTE os botões corretos estejam marcados (resolve o bug
+       de todos aparecerem selecionados ao carregar/atualizar a página). */
+    _syncBotoes: function () {
+      const preset = this._presetAtual || "frontal";
+      document.querySelectorAll("#cameraPresets button").forEach(b =>
+        b.classList.toggle("on", b.dataset.cam === preset));
+      document.querySelectorAll("#modeGroup button[data-mode]").forEach(b =>
+        b.classList.toggle("on", b.dataset.mode === this.modo));
+      const tog = (id, v) => { const el = $(id); if (el) el.classList.toggle("on", !!v); };
+      tog("btnCotas", this.cotas);
+      tog("btnFundo", this.fundoBranco);
+      tog("btnExplosao", this.explosaoAtiva);
+      tog("btnOpaco", this.vidroOpaco);
+      if (this.controls) { const ba = $("btnAutoRotate"); if (ba) ba.classList.toggle("on", !!this.controls.autoRotate); }
     },
     _bindPointer: function () {
       const c = this.canvas;

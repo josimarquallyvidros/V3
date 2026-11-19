@@ -45,6 +45,39 @@
       }, 40);
     });
 
+    /* ---- Visualização 3D ----
+       Centraliza os cliques de câmera e modo em um único manipulador. O
+       listener em captura impede que os handlers históricos do app.js e do
+       viewer3d.js processem o mesmo clique mais de uma vez. Os controles
+       liga/desliga (opaco, cotas, fundo, explosão) continuam independentes. */
+    document.addEventListener("click", function (e) {
+      const camera = e.target.closest("#cameraPresets button[data-cam]");
+      if (camera) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if (g.viewer3D && typeof g.viewer3D.setPreset === "function") g.viewer3D.setPreset(camera.dataset.cam);
+        document.querySelectorAll("#cameraPresets button[data-cam]").forEach(b => b.classList.toggle("on", b === camera));
+        return;
+      }
+
+      const mode = e.target.closest("#modeGroup button[data-mode]");
+      if (mode) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if (g.viewer3D) {
+          g.viewer3D.modo = mode.dataset.mode;
+          if (typeof g.viewer3D.render === "function") g.viewer3D.render();
+        }
+        document.querySelectorAll("#modeGroup button[data-mode]").forEach(b => b.classList.toggle("on", b === mode));
+      }
+    }, true);
+
+    /* Garante no carregamento que somente uma câmera e um modo estejam
+       ativos; os botões de alternância ficam desligados conforme o estado. */
+    setTimeout(function () {
+      if (g.viewer3D && typeof g.viewer3D._syncBotoes === "function") g.viewer3D._syncBotoes();
+    }, 350);
+
     /* ---- carimbo "Salvo" no cabeçalho (espelha o autosave da barra de status) ---- */
     const sb = $("sbAutosave"), stamp = $("saveStamp");
     if (sb && stamp) {

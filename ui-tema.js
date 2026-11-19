@@ -1,7 +1,6 @@
 /* =====================================================================
-   ui-tema.js  v1.2
-   Interface: tema, menu Configurações, estado inicial dos controles 3D
-   e carimbo "Salvo". Corrige os controles 3D sem duplicar cliques.
+   ui-tema.js  v1.3
+   Tema, menu Configurações e correção definitiva dos controles 3D.
    ===================================================================== */
 (function (g) {
   "use strict";
@@ -24,6 +23,28 @@
   document.addEventListener("DOMContentLoaded", function () {
     setTema(root.getAttribute("data-theme") || "light");
 
+    /* ---- CSS local: somente botões realmente ativos ficam azuis ---- */
+    if (!document.getElementById("viewerControlsFix")) {
+      const style = document.createElement("style");
+      style.id = "viewerControlsFix";
+      style.textContent = `
+        #tab-view .viewer-controls button {
+          background: transparent !important;
+          background-image: none !important;
+          color: var(--muted, #8aa0bf) !important;
+          box-shadow: none !important;
+        }
+        #tab-view .viewer-controls button.on {
+          background: var(--acc, #3b82f6) !important;
+          background-image: none !important;
+          color: #fff !important;
+        }
+        #tab-view #btnExplosao.on { background: var(--warn, #f59e0b) !important; color: #111 !important; }
+        #tab-view #btnOpaco.on { background: var(--acc2, #22d3ee) !important; color: #04121f !important; }
+      `;
+      document.head.appendChild(style);
+    }
+
     /* ---- menu Configurações ---- */
     const menu = $("menuCfg"), btn = $("btnCfg");
     if (menu && btn) {
@@ -33,7 +54,7 @@
       menu.querySelectorAll(".mi, .tab").forEach(el => el.addEventListener("click", () => menu.classList.remove("open")));
     }
 
-    /* ---- destaque do menu ativo + rolagem até a seção pedida ---- */
+    /* ---- destaque do menu ativo ---- */
     function marcarAtivo() {
       const on = document.querySelector(".tabs > .tab.on");
       if (btn) btn.classList.toggle("on", !!(on && on.closest(".menu-pop")));
@@ -48,13 +69,19 @@
       }, 40);
     });
 
-    /* ---- Visualização 3D: estado inicial seguro ---- */
-    const viewer = g.viewer3D;
-
+    /* ---- Estado visual 3D: somente 1 câmera e 1 modo ativos ---- */
     function sincronizarControles3D() {
-      if (viewer && typeof viewer._syncBotoes === "function") {
-        viewer._syncBotoes();
-        return;
+      const viewer = g.viewer3D;
+
+      if (viewer) {
+        viewer._presetAtual = "iso";
+        viewer.modo = "solido";
+        viewer.cotas = false;
+        viewer.vidroOpaco = false;
+        viewer.fundoBranco = false;
+        viewer.explosaoAtiva = false;
+        viewer.explosao = 0;
+        if (viewer.controls) viewer.controls.autoRotate = false;
       }
 
       document.querySelectorAll("#cameraPresets button").forEach(b =>
@@ -64,37 +91,33 @@
 
       ["btnCotas", "btnFundo", "btnExplosao", "btnOpaco", "btnAutoRotate"]
         .forEach(id => { const el = $(id); if (el) el.classList.remove("on"); });
+
+      const slider = $("explosaoSlider");
+      if (slider) { slider.value = "0"; slider.disabled = true; }
+
+      if (viewer && typeof viewer._syncBotoes === "function") viewer._syncBotoes();
+
+      // Corrige reapresentação caso app.js tenha redeclarado classes antigas.
+      document.querySelectorAll("#cameraPresets button").forEach(b =>
+        b.classList.toggle("on", b.dataset.cam === "iso"));
+      document.querySelectorAll("#modeGroup button[data-mode]").forEach(b =>
+        b.classList.toggle("on", b.dataset.mode === "solido"));
     }
 
-    // Remove imediatamente as classes antigas deixadas pelo index.html.
-    document.querySelectorAll("#tab-view .viewer-controls button.on").forEach(b => b.classList.remove("on"));
+    // Remove estados pintados pelo HTML antes dos scripts terminarem.
+    document.querySelectorAll("#tab-view .viewer-controls button").forEach(b => b.classList.remove("on"));
+    document.querySelectorAll("#cameraPresets button").forEach(b => b.classList.toggle("on", b.dataset.cam === "iso"));
+    document.querySelectorAll("#modeGroup button[data-mode]").forEach(b => b.classList.toggle("on", b.dataset.mode === "solido"));
 
-    if (viewer) {
-      viewer._presetAtual = "iso";
-      viewer.modo = "solido";
-      viewer.cotas = false;
-      viewer.vidroOpaco = false;
-      viewer.fundoBranco = false;
-      viewer.explosaoAtiva = false;
-      viewer.explosao = 0;
-      if (viewer.controls) viewer.controls.autoRotate = false;
-    }
+    [50, 150, 300, 600, 1200].forEach(atraso => setTimeout(sincronizarControles3D, atraso));
 
-    const slider = $("explosaoSlider");
-    if (slider) { slider.value = "0"; slider.disabled = true; }
-
-    sincronizarControles3D();
-
-    // O visualizador é iniciado por app.js depois do DOMContentLoaded.
-    // Reaplica o estado em alguns momentos para impedir classes residuais.
-    [100, 300, 600, 1200].forEach(atraso => setTimeout(sincronizarControles3D, atraso));
-
-    /* ---- Clique único: evita que app.js e viewer3d.js processem juntos ---- */
+    // Captura um único clique para câmera/modo, antes dos handlers duplicados.
     document.addEventListener("click", function (e) {
       const camera = e.target.closest("#cameraPresets button[data-cam]");
       if (camera) {
         e.preventDefault();
         e.stopImmediatePropagation();
+        const viewer = g.viewer3D;
         if (viewer && typeof viewer.setPreset === "function") viewer.setPreset(camera.dataset.cam);
         document.querySelectorAll("#cameraPresets button").forEach(b => b.classList.toggle("on", b === camera));
         return;
@@ -104,15 +127,13 @@
       if (mode) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        if (viewer) {
-          viewer.modo = mode.dataset.mode;
-          if (typeof viewer.render === "function") viewer.render();
-        }
+        const viewer = g.viewer3D;
+        if (viewer) { viewer.modo = mode.dataset.mode; if (typeof viewer.render === "function") viewer.render(); }
         document.querySelectorAll("#modeGroup button[data-mode]").forEach(b => b.classList.toggle("on", b === mode));
       }
     }, true);
 
-    /* ---- carimbo "Salvo" no cabeçalho (espelha o autosave da barra de status) ---- */
+    /* ---- carimbo "Salvo" ---- */
     const sb = $("sbAutosave"), stamp = $("saveStamp");
     if (sb && stamp) {
       const sync = () => {

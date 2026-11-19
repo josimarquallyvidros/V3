@@ -1,7 +1,7 @@
 /* =====================================================================
-   ui-tema.js  v1.1
+   ui-tema.js  v1.2
    Interface: tema, menu Configurações, estado inicial dos controles 3D
-   e carimbo "Salvo". Os cliques de câmera/modo são tratados pelo viewer3d.
+   e carimbo "Salvo". Corrige os controles 3D sem duplicar cliques.
    ===================================================================== */
 (function (g) {
   "use strict";
@@ -48,13 +48,27 @@
       }, 40);
     });
 
-    /* ---- Estado inicial da visualização 3D ----
-       Os únicos estados selecionados ao iniciar são uma câmera e um modo.
-       Todos os controles liga/desliga começam desativados. O arquivo index
-       contém classes iniciais para renderização sem JS; removê-las aqui
-       evita que permaneçam visíveis caso a inicialização do viewer atrase. */
+    /* ---- Visualização 3D: estado inicial seguro ---- */
     const viewer = g.viewer3D;
+
+    function sincronizarControles3D() {
+      if (viewer && typeof viewer._syncBotoes === "function") {
+        viewer._syncBotoes();
+        return;
+      }
+
+      document.querySelectorAll("#cameraPresets button").forEach(b =>
+        b.classList.toggle("on", b.dataset.cam === "iso"));
+      document.querySelectorAll("#modeGroup button[data-mode]").forEach(b =>
+        b.classList.toggle("on", b.dataset.mode === "solido"));
+
+      ["btnCotas", "btnFundo", "btnExplosao", "btnOpaco", "btnAutoRotate"]
+        .forEach(id => { const el = $(id); if (el) el.classList.remove("on"); });
+    }
+
+    // Remove imediatamente as classes antigas deixadas pelo index.html.
     document.querySelectorAll("#tab-view .viewer-controls button.on").forEach(b => b.classList.remove("on"));
+
     if (viewer) {
       viewer._presetAtual = "iso";
       viewer.modo = "solido";
@@ -65,14 +79,38 @@
       viewer.explosao = 0;
       if (viewer.controls) viewer.controls.autoRotate = false;
     }
+
     const slider = $("explosaoSlider");
     if (slider) { slider.value = "0"; slider.disabled = true; }
 
-    /* Depois do init do viewer, desenha só a opção default de cada grupo e
-       mantém os toggles visualmente desligados conforme seus estados. */
-    setTimeout(() => {
-      if (viewer && typeof viewer._syncBotoes === "function") viewer._syncBotoes();
-    }, 400);
+    sincronizarControles3D();
+
+    // O visualizador é iniciado por app.js depois do DOMContentLoaded.
+    // Reaplica o estado em alguns momentos para impedir classes residuais.
+    [100, 300, 600, 1200].forEach(atraso => setTimeout(sincronizarControles3D, atraso));
+
+    /* ---- Clique único: evita que app.js e viewer3d.js processem juntos ---- */
+    document.addEventListener("click", function (e) {
+      const camera = e.target.closest("#cameraPresets button[data-cam]");
+      if (camera) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if (viewer && typeof viewer.setPreset === "function") viewer.setPreset(camera.dataset.cam);
+        document.querySelectorAll("#cameraPresets button").forEach(b => b.classList.toggle("on", b === camera));
+        return;
+      }
+
+      const mode = e.target.closest("#modeGroup button[data-mode]");
+      if (mode) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if (viewer) {
+          viewer.modo = mode.dataset.mode;
+          if (typeof viewer.render === "function") viewer.render();
+        }
+        document.querySelectorAll("#modeGroup button[data-mode]").forEach(b => b.classList.toggle("on", b === mode));
+      }
+    }, true);
 
     /* ---- carimbo "Salvo" no cabeçalho (espelha o autosave da barra de status) ---- */
     const sb = $("sbAutosave"), stamp = $("saveStamp");
